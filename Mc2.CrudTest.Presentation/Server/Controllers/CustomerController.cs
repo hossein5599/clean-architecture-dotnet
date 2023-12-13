@@ -13,6 +13,7 @@ namespace Mc2.CrudTest.Presentation.Server.Controllers
     [Route("[controller]")]
     public class CustomerController : ControllerBase
     {
+        private readonly IMediator _mediator;
         private static readonly string[] Summaries = new[]
         {
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
@@ -20,9 +21,10 @@ namespace Mc2.CrudTest.Presentation.Server.Controllers
 
         private readonly ILogger<WeatherForecastController> _logger;
 
-        public CustomerController(ILogger<WeatherForecastController> logger)
+        public CustomerController(ILogger<WeatherForecastController> logger, IMediator mediator)
         {
             _logger = logger;
+            _mediator = mediator;
         }
 
         [HttpGet]

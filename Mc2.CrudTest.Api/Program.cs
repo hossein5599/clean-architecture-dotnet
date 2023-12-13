@@ -6,6 +6,9 @@ using FluentValidation.AspNetCore;
 using Mc2.CrudTest.Infrastructure.Persistence;
 using System.Reflection;
 using FluentValidation;
+using Microsoft.AspNetCore.Hosting;
+using MediatR;
+using MediatR.Pipeline;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -42,6 +45,12 @@ builder.Services.AddControllersWithViews(options =>
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddFluentValidationClientsideAdapters();
 builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
+//builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
+//builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
+
+// Add MediatR
+//builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestPreProcessorBehavior<,>));
+//builder.Services.AddMediatR(typeof(LoginCustomerQueryHandler).GetTypeInfo().Assembly);
 
 var app = builder.Build();
 
